@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnóstico Shopify - Interactivo</title>
+    <!-- Dependencies CSS Files -->
+    <link rel="stylesheet" href="assets/vandor/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/vandor/fontawesome/fontawesome-pro.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <style>
+        body {
+            background-color: #0b0c10;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .funnel-container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .step {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out forwards;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        .question-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: #fff;
+        }
+
+        .option-card {
+            background-color: #1a1e23;
+            border: 2px solid #282d33;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .option-card:hover {
+            border-color: #ccc;
+            transform: translateX(5px);
+        }
+
+        .option-card h4 {
+            margin: 0;
+            font-size: 1.2rem;
+            color: #fff;
+        }
+
+        .control-btns {
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn-prev {
+            background: transparent;
+            color: #888;
+            border: none;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+
+        .btn-prev:hover {
+            color: #fff;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 5px;
+            background: #282d33;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: #ccc;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .back-home {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .back-home:hover {
+            color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+
+    <a href="index.html" class="back-home"><i class="fa-regular fa-arrow-left"></i> Volver</a>
+
+    <div class="progress-bar-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="funnel-container">
+        <!-- Paso 1 -->
+        <div class="step active" data-step="1">
+            <h2 class="question-title">¿En qué etapa se encuentra tu tienda online? 🚀</h2>
+            <div class="option-card" onclick="nextStep(2)">
+                <h4>Aún no tengo tienda (Quiero empezar desde cero)</h4>
+            </div>
+            <div class="option-card" onclick="nextStep(2)">
+                <h4>Tengo tienda, pero quiero migrar a Shopify</h4>
+            </div>
+            <div class="option-card" onclick="nextStep(2)">
+                <h4>Ya uso Shopify y busco rediseño o mejoras técnicas</h4>
+            </div>
+        </div>
+
+        <!-- Paso 2 -->
+        <div class="step" data-step="2">
+            <h2 class="question-title">¿Cuál es tu principal desafío actual? 🎯</h2>
+            <div class="option-card" onclick="nextStep(3)">
+                <h4>Baja tasa de conversión (Tengo visitas pero no ventas)</h4>
+            </div>
+            <div class="option-card" onclick="nextStep(3)">
+                <h4>Problemas técnicos (Velocidad, integraciones, pagos)</h4>
+            </div>
+            <div class="option-card" onclick="nextStep(3)">
+                <h4>El diseño no transmite profesionalismo</h4>
+            </div>
+            <div class="control-btns">
+                <button class="btn-prev" onclick="prevStep(1)"><i class="fa-regular fa-arrow-left"></i>
+                    Anterior</button>
+            </div>
+        </div>
+
+        <!-- Paso 3 -->
+        <div class="step" data-step="3">
+            <h2 class="question-title">Deja tus datos para enviarte una cotización precisa ✉️</h2>
+            <div style="background: #1a1e23; padding: 30px; border-radius: 12px; border: 2px solid #282d33;">
+                <input type="text" placeholder="Tu Nombre" class="form-control mb-3"
+                    style="background: #0b0c10; color: #fff; border-color:#282d33; padding: 15px;" id="name">
+                <input type="email" placeholder="Tu Correo Electrónico" class="form-control mb-4"
+                    style="background: #0b0c10; color: #fff; border-color:#282d33; padding: 15px;" id="email">
+                <button class="rr-btn" style="width: 100%; border-radius: 8px;" onclick="submitForm()">
+                    <span class="btn-wrap">
+                        <span class="text-one">Solicitar Presupuesto</span>
+                        <span class="text-two">Solicitar Presupuesto</span>
+                    </span>
+                </button>
+            </div>
+            <div class="control-btns">
+                <button class="btn-prev" onclick="prevStep(2)"><i class="fa-regular fa-arrow-left"></i>
+                    Anterior</button>
+            </div>
+        </div>
+
+        <!-- Mensaje de Éxito -->
+        <div class="step text-center" data-step="4">
+            <h1 style="font-size: 5rem; margin-bottom: 20px;">✅</h1>
+            <h2 class="question-title">¡Información Recibida!</h2>
+            <p style="font-size: 1.2rem; color: #aaa;">Nuestro equipo revisará tu caso y te contactará en las próximas
+                24 horas con una propuesta a la medida para tu tienda en Chile.</p>
+            <br>
+            <a href="index.html" class="rr-btn">
+                <span class="btn-wrap">
+                    <span class="text-one">Volver al Inicio</span>
+                    <span class="text-two">Volver al Inicio</span>
+                </span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 3;
+
+        function updateProgress() {
+            const percent = ((currentStep - 1) / totalSteps) * 100;
+            document.getElementById('progressBar').style.width = percent + '%';
+        }
+
+        function nextStep(step) {
+            document.querySelector(`.step[data-step="${currentStep}"]`).classList.remove('active');
+            currentStep = step;
+            document.querySelector(`.step[data-step="${currentStep}"]`).classList.add('active');
+            updateProgress();
+        }
+
+        function prevStep(step) {
+            document.querySelector(`.step[data-step="${currentStep}"]`).classList.remove('active');
+            currentStep = step;
+            document.querySelector(`.step[data-step="${currentStep}"]`).classList.add('active');
+            updateProgress();
+        }
+
+        function submitForm() {
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            if (name && email) {
+                // Here we usually send to an API or Webhook
+                nextStep(4);
+            } else {
+                alert("Por favor completa los campos.");
+            }
+        }
+    </script>
+</body>
+
+</html>
